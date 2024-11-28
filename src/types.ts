@@ -25,7 +25,7 @@ export interface Result {
 export interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: any;
+  belongs_to_collection: unknown;
   budget: number;
   genres: Genre[];
   homepage: string;

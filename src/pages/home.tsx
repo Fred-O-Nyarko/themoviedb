@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { Result } from '~/types';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { fetchMovieLists } from '~/services';
+import { fetchMovieLists } from '../services';
+import { Result } from '../types';
 
 
 export function meta() {

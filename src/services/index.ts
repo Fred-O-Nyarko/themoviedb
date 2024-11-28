@@ -1,4 +1,4 @@
-import { MovieDetails, MovieList } from '~/types';
+import { MovieDetails, MovieList } from '../types';
 
 export const fetchMovieDetails = async (id: string): Promise<MovieDetails> => {
   const options = {

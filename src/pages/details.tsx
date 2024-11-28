@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { MovieDetails } from '~/types';
 import { useParams } from 'react-router';
-import { fetchMovieDetails } from '~/services';
+import { fetchMovieDetails } from '../services';
+import { MovieDetails } from '../types';
 
 
 
