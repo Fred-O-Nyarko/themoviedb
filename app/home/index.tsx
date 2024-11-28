@@ -1,6 +1,7 @@
 import React from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { MovieList, Result } from '~/types';
+import { useNavigate } from 'react-router';
 
 const fetchMovieLists = async ({ pageParam = 1 }: { pageParam?: number }): Promise<MovieList> => {
   const options = {
@@ -24,6 +25,9 @@ const fetchMovieLists = async ({ pageParam = 1 }: { pageParam?: number }): Promi
 };
 
 const MoviesList: React.FC = () => {
+
+  const navigate = useNavigate();
+
   const {
     data,
     error,
@@ -72,7 +76,8 @@ const MoviesList: React.FC = () => {
             page.results.map((movie: Result) => (
               <div
                 key={movie.id}
-                className="group relative bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105"
+                onClick={() => navigate(`/movie/${movie.id}`)}
+                className="group relative bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 cursor-pointer"
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
