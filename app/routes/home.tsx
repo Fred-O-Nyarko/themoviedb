@@ -1,5 +1,11 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { Result } from '~/types';
+import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
+import { fetchMovieLists } from '~/services';
 
-export function meta({ }: Route.MetaArgs) {
+
+export function meta() {
   return [
     { title: "Movies" },
     { name: "description", content: "Movies List Tech Test" },
@@ -7,32 +13,6 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { MovieList, Result } from '~/types';
-import { useNavigate } from 'react-router';
-import { Route } from "./+types/home";
-import { useEffect } from 'react';
-
-const fetchMovieLists = async ({ pageParam = 1 }: { pageParam?: number }): Promise<MovieList> => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_APP_API_KEY}`,
-    },
-  };
-
-  const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${pageParam}&sort_by=popularity.desc`,
-    options
-  );
-
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-
-  return response.json();
-};
 
 const MoviesList: React.FC = () => {
 
@@ -101,8 +81,8 @@ const MoviesList: React.FC = () => {
             ))
           )}
         </div>
-        {isFetchingNextPage && <p className="text-center mt-4">Loading more...</p>}
-        {!hasNextPage && <p className="text-center mt-4">No more movies!</p>}
+        {isFetchingNextPage && <p className="text-center mt-4">Loading more movies 🎊...</p>}
+        {!hasNextPage && <p className="text-center mt-4">Looks empty in here 😢</p>}
       </div>
     </div>
   );

@@ -1,25 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { MovieDetails } from '~/types';
 import { useParams } from 'react-router';
+import { fetchMovieDetails } from '~/services';
 
-const fetchMovieDetails = async (id: string): Promise<MovieDetails> => {
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_APP_API_KEY}`,
 
-        },
-    };
-
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch movie details');
-    }
-
-    return response.json();
-};
 
 const MovieDetail = () => {
     const { id } = useParams();
@@ -31,7 +15,7 @@ const MovieDetail = () => {
     );
 
     if (!data) return <p className='text-center text-white'> Uh oh 😢.... I cannot find your data.</p>
-    if (isLoading) return <p className="text-center text-white">Loading...</p>;
+    if (isLoading) return <p className="text-center text-white">Loading 🎊...</p>;
     if (error) return <p className="text-center text-red-500">Error: {error.message}</p>;
 
     const {
