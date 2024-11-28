@@ -30,6 +30,7 @@ const MovieDetail = () => {
         }
     );
 
+    if (!data) return <p className='text-center text-white'> Uh oh 😢.... I cannot find your data.</p>
     if (isLoading) return <p className="text-center text-white">Loading...</p>;
     if (error) return <p className="text-center text-red-500">Error: {error.message}</p>;
 
@@ -43,7 +44,7 @@ const MovieDetail = () => {
         poster_path,
         runtime,
         tagline,
-    } = data!;
+    } = data;
 
     return (
         <div className="bg-black min-h-screen text-white font-sans">
