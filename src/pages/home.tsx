@@ -1,22 +1,22 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { useEffect } from 'react';
 import { fetchMovieLists } from '../services';
 import { Result } from '../types';
 
 
-export function meta() {
-  return [
-    { title: "Movies" },
-    { name: "description", content: "Movies List Tech Test" },
-  ];
-}
+// export function meta() {
+//   return [
+//     { title: "Movies" },
+//     { name: "description", content: "Movies List Tech Test" },
+//   ];
+// }
 
 
 
 const MoviesList: React.FC = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     data,
@@ -63,9 +63,9 @@ const MoviesList: React.FC = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {data?.pages.map((page) =>
             page.results.map((movie: Result) => (
-              <div
+              <Link
                 key={movie.id}
-                onClick={() => navigate(`/movie/${movie.id}`)}
+                to={`/movie/${movie.id}`}
                 className="group relative bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 cursor-pointer"
               >
                 <img
@@ -77,7 +77,7 @@ const MoviesList: React.FC = () => {
                   <h3 className="text-lg font-bold">{movie.title}</h3>
                   <p className="text-sm text-gray-300">{movie.release_date}</p>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>
